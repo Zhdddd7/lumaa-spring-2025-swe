@@ -68,4 +68,9 @@ here is an example:
    npm start
    ```
 Now go to http://localhost:3000 to see the website!
-  
+
+## A short video demo to illusatrate
+
+I run the code and record a demo [here](https://youtu.be/joklU7G31xc)
+
+*ps: salary expection: > 7000 USD / month
