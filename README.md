@@ -1,119 +1,71 @@
-# Full-Stack Coding Challenge
+# Task Manager Backend
 
-**Deadline**: Sunday, Feb 23th 11:59 pm PST
+This is a simple Task Management backend built with Node.js, Express, TypeScript, and PostgreSQL. It supports user registration, login (using bcrypt for password hashing and JWT for authentication), and CRUD operations for tasks. 
+## Table of Contents
 
----
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Environment Variables](#environment-variables)
+- [Database Setup](#database-setup)
+- [Running the Application](#running-the-application)
+- [API Endpoints](#api-endpoints)
+- [Notes](#notes)
 
-## Overview
+## Prerequisites
 
-Create a “Task Management” application with **React + TypeScript** (frontend), **Node.js** (or **Nest.js**) (backend), and **PostgreSQL** (database). The application should:
+- [Node.js](https://nodejs.org/) (v14 or later)
+- [PostgreSQL](https://www.postgresql.org/) database
 
-1. **Register** (sign up) and **Log in** (sign in) users.
-2. After logging in, allow users to:
-   - **View a list of tasks**.
-   - **Create a new task**.
-   - **Update an existing task** (e.g., mark complete, edit).
-   - **Delete a task**.
+## Installation
 
-Focus on **correctness**, **functionality**, and **code clarity** rather than visual design.  
-This challenge is intended to be completed within ~3 hours, so keep solutions minimal yet functional.
+1. Clone the repository and navigate to the project folder:
 
----
+   ```bash
+   git clone https://github.com/Zhdddd7/lumaa-spring-2025-swe
+   cd task-manager-backend
+   ```
+2. Install the dependencies:
 
-## Requirements
+   ```bash
+   npm install
+   ```
+3. Create a .env file in the project root (next to package.json and tsconfig.json) with the following content:
+    ```bash
+    PORT=5000
+    DATABASE_URL=postgresql://<your-user-name>:<password>@localhost:5432/<your-db-name>
+    JWT_SECRET=your_jwt_secret
+   ```
 
-### 1. Authentication
+## Database Setup
+Create your db(the command may be different depends on your database tools) and migrate the database table through the migration.sql
+here is an example:
+  ```
+  createdb lumaa
+  psql -d lumaa -f migration.sql
+  ```
+## Launch the Backend
+1. (Optional)Now you are already in the backend folder, so you can compile the ts files, but this is not necessary since I will provide the compiled file as well
 
-- **User Model**:
-  - `id`: Primary key
-  - `username`: Unique string
-  - `password`: Hashed string
-- **Endpoints**:
-  - `POST /auth/register` – Create a new user
-  - `POST /auth/login` – Login user, return a token (e.g., JWT)
-- **Secure the Tasks Routes**: Only authenticated users can perform task operations.  
-  - **Password Hashing**: Use `bcrypt` or another hashing library to store passwords securely.
-  - **Token Verification**: Verify the token (JWT) on each request to protected routes.
+   ```bash
+   npx tsc -p tsconfig.json
+   ```
+2. Run Backend
+    ```bash
+   node dist/server.js
+   ```
+## Launch the Frontend
+1. go to the frontend folder
+    ```bash
+   cd task-manager-frontend
+   ```
+2. Install the dependencies:
 
-### 2. Backend (Node.js or Nest.js)
-
-- **Tasks CRUD**:  
-  - `GET /tasks` – Retrieve a list of tasks (optionally filtered by user).  
-  - `POST /tasks` – Create a new task.  
-  - `PUT /tasks/:id` – Update a task (e.g., mark as complete, edit text).  
-  - `DELETE /tasks/:id` – Delete a task.
-- **Task Model**:
-  - `id`: Primary key
-  - `title`: string
-  - `description`: string (optional)
-  - `isComplete`: boolean (default `false`)
-  - _(Optional)_ `userId` to link tasks to the user who created them
-- **Database**: PostgreSQL
-  - Provide instructions/migrations to set up:
-    - `users` table (with hashed passwords)
-    - `tasks` table
-- **Setup**:
-  - `npm install` to install dependencies
-  - `npm run start` (or `npm run dev`) to run the server
-  - Document any environment variables (e.g., database connection string, JWT secret)
-
-### 3. Frontend (React + TypeScript)
-
-- **Login / Register**:
-  - Simple forms for **Register** and **Login**.
-  - Store JWT (e.g., in `localStorage`) upon successful login.
-  - If not authenticated, the user should not see the tasks page.
-- **Tasks Page**:
-  - Fetch tasks from `GET /tasks` (including auth token in headers).
-  - Display the list of tasks.
-  - Form to create a new task (`POST /tasks`).
-  - Buttons/fields to update a task (`PUT /tasks/:id`).
-  - Button to delete a task (`DELETE /tasks/:id`).
-- **Navigation**:
-  - Show `Login`/`Register` if not authenticated.
-  - Show `Logout` if authenticated.
-- **Setup**:
-  - `npm install` then `npm start` (or `npm run dev`) to run.
-  - Document how to point the frontend at the backend (e.g., `.env` file, base URL).
-
----
-
-## Deliverables
-
-1. **Fork the Public Repository**: **Fork** this repo into your own GitHub account.
-2. **Implement Your Solution** in the forked repository. Make sure you're README file has:
-   - Steps to set up the database (migrations, environment variables).
-   - How to run the backend.
-   - How to run the frontend.
-   - Any relevant notes on testing.
-   - Salary Expectations per month (Mandatory)
-3. **Short Video Demo**: Provide a link (in a `.md` file in your forked repo) to a brief screen recording showing:
-   - Registering a user
-   - Logging in
-   - Creating, updating, and deleting tasks
-4. **Deadline**: Submissions are due **Sunday, Feb 23th 11:59 pm PST**.
-
-> **Note**: Please keep your solution minimal. The entire project is intended to be completed in around 3 hours. Focus on core features (registration, login, tasks CRUD) rather than polished UI or extra features.
-
----
-
-## Evaluation Criteria
-
-1. **Functionality**  
-   - Does registration and login work correctly (with password hashing)?
-   - Are tasks protected by authentication?
-   - Does the tasks CRUD flow work end-to-end?
-
-2. **Code Quality**  
-   - Is the code structured logically and typed in TypeScript?
-   - Are variable/function names descriptive?
-
-3. **Clarity**  
-   - Is the `README.md` (in your fork) clear and detailed about setup steps?
-   - Easy to run and test?
-
-4. **Maintainability**  
-   - Organized logic (controllers/services, etc.)
-   - Minimal hard-coded values
-
-Good luck, and we look forward to your submission!
+   ```bash
+   npm install
+   ```
+3. Launch the frontend:
+    ```bash
+   npm start
+   ```
+Now go to http://localhost:3000 to see the website!
+  
